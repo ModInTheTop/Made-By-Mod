@@ -45,7 +45,7 @@ echo -e '\033[31;40;1m
 # Selección de opciones
 
 
-read -p "Numri i transaksionit: " islem
+read -p "Selecione Un Número ▸  " islem
 if [[ $islem == 1 || $islem == 01 ]]; then
 clear
 
@@ -60,7 +60,7 @@ apt upgrade -y
 clear
 echo -e "\033[47;3;35m Actualización completa...\033[0m"
 sleep 3
-bash alhack.sh
+bash Mod.sh
 
 elif [[ $islem == 2 || $islem == 02 ]]; then
 clear
@@ -246,5 +246,5 @@ else
         echo -e '\033[36;40;1m Ingresaste el código incorrecto'	
 	sleep 1
 	clear 
-	bash alhack.sh
+	bash Mod.sh
 fi
