@@ -38,7 +38,7 @@ echo -e "\033[0;35m
 \e[37m[11]\e[36m VirusCrafter                 \e[37m[12]\e[36m Info-Site
 \e[37m[13]\e[36m BadMod	                  \e[37m[14]\e[36m Facebash
 \e[37m[15]\e[36m DARKARMY                     \e[37m[16]\e[36m AUTO-IP-CHANGER
-\e[37m[17]\e[36m Proximamente...                \e[37m[18]\e[36m Proximamente...
+\e[37m[17]\e[36m Jhon The Ripper                \e[37m[18]\e[36m Proximamente...
 '
 
 
@@ -240,6 +240,15 @@ echo -e "\033[47;3;35m Vaya a su navegador / cambie el representante (sock proxy
 sleep 8
 python3 install.py
 aut
+
+elif [[ $islem == 17 || $islem == 017 ]]; then
+clear
+echo -e "\033[47;3;35m La instalación puede llevar algún tiempo...\033[0m"
+sleep 3
+cd Tools
+git clone https://github.com/openwall/john
+cd openwall
+bash jhon
 
 else   
 	clear
