@@ -53,3 +53,5 @@ echo -e '\033[31;40;1m
 '
 
 #Selección de opciones
+read -p "Ingresa una opción > " islem
+bash plugin_manager.sh
