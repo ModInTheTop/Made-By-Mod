@@ -37,18 +37,18 @@ echo -e '\033[31;40;1m
 \033[33;4mVersion:\033[0m 1.5⠀                      \033[33;4mCTRL+C:\033[0m Exit
 													
 
-╓꒷꒦꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷꒷꒦꒷꒦꒷꒦꒷꒦꒷꒦╖
- Fuck Society - Bad Choices Make Good Stories - Ur Blessed - The World Is Yours              
-╙────────────────────────────────────────────────────────────────────────────────╜
- ᯓ➤ \e[37m[1]\e[36m Actualizar la Shell         ᯓ➤ \e[37m[2]\e[36m Phishing Tool				
- ᯓ➤ \e[37m[3]\e[36m WebCam Hack                 ᯓ➤ \e[37m[4]\e[36m Subscan			
- ᯓ➤ \e[37m[5]\e[36m Gmail Bomber		    ᯓ➤ \e[37m[6]\e[36m DDOS Attack			
- ᯓ➤ \e[37m[7]\e[36m CiLocks (Track Android(root)ᯓ➤ \e[37m[8]\e[36m Desinstale los programas descargados		
- ᯓ➤ \e[37m[9]\e[36m Ip Info	                    ᯓ➤ \e[37m[10]\e[36m Dorks-eye
- ᯓ➤ \e[37m[11]\e[36m HackerPro                  ᯓ➤ \e[37m[12]\e[36m RED_HAWK
- ᯓ➤ \e[37m[13]\e[36m VirusCrafter               ᯓ➤ \e[37m[14]\e[36m Info-Site
- ᯓ➤ \e[37m[15]\e[36m BadMod	                    ᯓ➤ \e[37m[16]\e[36m Facebash
- ᯓ➤ \e[37m[17]\e[36m DARKARMY                   ᯓ➤ \e[37m[18]\e[36m AUTO-IP-CHANGER
+╓﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌╖
+  Fuck Society - Bad Choices Make Good Stories - Ur Blessed - The World Is Yours
+╙﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌﹌╜
+ ⤷ \e[37m[1]\e[36m Actualizar la Shell         ⤷ \e[37m[2]\e[36m Phishing Tool				
+ ⤷ \e[37m[3]\e[36m WebCam Hack                 ⤷ \e[37m[4]\e[36m Subscan			
+ ⤷ \e[37m[5]\e[36m Gmail Bomber		    ⤷ \e[37m[6]\e[36m DDOS Attack			
+ ⤷ \e[37m[7]\e[36m CiLocks (Track Android(root)⤷ \e[37m[8]\e[36m Desinstale los programas descargados		
+ ⤷ \e[37m[9]\e[36m Ip Info	                    ⤷ \e[37m[10]\e[36m Dorks-eye
+ ⤷ \e[37m[11]\e[36m HackerPro                  ⤷ \e[37m[12]\e[36m RED_HAWK
+ ⤷ \e[37m[13]\e[36m VirusCrafter               ⤷ \e[37m[14]\e[36m Info-Site
+ ⤷ \e[37m[15]\e[36m BadMod	                    ⤷ \e[37m[16]\e[36m Facebash
+ ⤷ \e[37m[17]\e[36m DARKARMY                   ⤷ \e[37m[18]\e[36m AUTO-IP-CHANGER
 
 '
 
