@@ -37,7 +37,7 @@ echo -e '\033[31;40;1m
 \033[33;4mVersion:\033[0m 1.0⠀                      \033[33;4mCTRL+C:\033[0m Exit
 
 ╓───────────────────────────────────────────────────────────────────────────────╖
- Fuck Society - Bad Choices Make Good Stories - Im Blessed - The World Is Yours              
+ Fuck Society - Bad Choices Make Good Stories - Ur Blessed - The World Is Yours              
 ╙┬──────────────────────────────────┬───────────────────────────────────────────╜
  ├─ \e[37m[1]\e[36m Actualizar la Shell         ├─ \e[37m[2]\e[36m Phishing Tool				
  ├─ \e[37m[3]\e[36m WebCam Hack                 ├─ \e[37m[4]\e[36m Subscan			
