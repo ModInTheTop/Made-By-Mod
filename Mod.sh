@@ -127,9 +127,9 @@ sudo bash cilocks
 elif [[ $islem == 8 || $islem == 08 ]]; then
 clear
 sleep 3 
-rm -r Made-By-Mod
+rm -rf Tools
 
-bash alhack.sh
+bash Mod.sh
 
 elif [[ $islem == 9 || $islem == 09 ]]; then
 clear
