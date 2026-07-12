@@ -25,7 +25,12 @@ Dem0nT00ls Hackkit es una colección de utilidades para profesionales y estudian
 > **Aviso:** Este proyecto está destinado exclusivamente a actividades legales y auditorías realizadas con autorización expresa del propietario de los sistemas. El uso indebido de estas herramientas es responsabilidad exclusiva del usuario. Disfrutar de la herramientas y recordar:  Big Money, Never Come's Clean
 
 
-![Captura de pantalla](./images/screenshot.png)
+## Características
+
+> 
+
+
+
 
 
 
@@ -57,7 +62,7 @@ Dem0nT00ls Hackkit es una colección de utilidades para profesionales y estudian
 
 # CyberSec Toolkit
 
-CyberSec Toolkit es una colección de utilidades para profesionales y estudiantes de ciberseguridad enfocada en el aprendizaje, la investigación y las auditorías de seguridad autorizadas. El proyecto reúne diferentes herramientas para el análisis de redes, reconocimiento, evaluación de vulnerabilidades, pruebas de aplicaciones web, análisis de información y automatización de tareas de pentesting en entornos controlados.
+
 
 ## Características
 
