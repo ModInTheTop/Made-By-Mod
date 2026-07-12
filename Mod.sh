@@ -35,6 +35,7 @@ echo -e '\033[31;40;1m
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠳⢶⣤⣤⣤⣤⣤⡴⠞⠁⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 \033[33;4mVersion:\033[0m 1.0⠀                      \033[33;4mCTRL+C:\033[0m Exit
+													{white}Plugin Manager {PREFIX}P{SUFFIX}{red}
 
 ╓───────────────────────────────────────────────────────────────────────────────╖
  Fuck Society - Bad Choices Make Good Stories - Ur Blessed - The World Is Yours              
@@ -50,8 +51,59 @@ echo -e '\033[31;40;1m
  ├─ \e[37m[17]\e[36m DARKARMY                   ├─ \e[37m[18]\e[36m AUTO-IP-CHANGER
 
 '
+#Intento de Sistema De Pluggins
 
+def GetVisiblePlugins():
+    try:
+        data        = LoadData()
+        visible     = data.get("plugins_visible", [])
+        plugins_dir = os.path.join(tool_path, "Programs", "Plugins")
+ 
+        if not os.path.exists(plugins_dir):
+            return []
+ 
+        result = []
+        for folder in sorted(os.listdir(plugins_dir)):
+            if folder == "__pycache__":
+                continue
+            if folder not in visible:
+                continue
+            json_path = os.path.join(plugins_dir, folder, "plugin.json")
+            if not os.path.exists(json_path):
+                continue
+            try:
+                with open(json_path, "r", encoding="utf-8") as f:
+                    pdata = _json.load(f)
+                result.append((folder, pdata))
+            except Exception:
+                continue
+ 
+        return result[:10]
+    except Exception:
+        return []
+ 
+def BuildPluginLines():
+    plugins = GetVisiblePlugins()
+    lines   = []
+ 
+    for i, (folder, pdata) in enumerate(plugins):
+        num     = str(41 + i).zfill(2)
+        is_last = (i == len(plugins) - 1)
+        prefix  = "└─" if is_last else "├─"
+        name    = pdata.get("name", folder)
+        if VisibleLen(name) > 30:
+            name = name[:29] + ".."
+        lines.append(f" {prefix} {PREFIX1}{num}{SUFFIX1} {name}")
+ 
+    return lines
 
+	plugin_lines = BuildPluginLines()
+	max_lines = len(plugin_lines)
+	 for i in range(max_lines):
+        c1 = plugin_lines[i]  if i < len(plugin_lines)  else ""
+		
+		  return "\n".join(rows)
+	
 #Selección de opciones
 
 
