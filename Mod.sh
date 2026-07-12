@@ -244,7 +244,6 @@ python2 darkarmy.py
 
 elif [[ $islem == 18 || $islem == 018 ]]; then
 clear
-echo -e "\033[47;3;35m Instalimi mund të marrë pak kohe\033[0m"
 sleep 3
 cd Tools
 sudo apt-get install tor
