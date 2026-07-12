@@ -54,4 +54,14 @@ echo -e '\033[31;40;1m
 
 #Selección de opciones
 read -p "Ingresa una opción > " islem
-bash plugin_manager.sh
+
+
+export islem
+
+# Ejecutar el plugin manager
+if [ -f "plugin_manager.sh" ]; then
+    bash plugin_manager.sh
+else
+    echo "Error: plugin_manager.sh no encontrado"
+    exit 1
+fi
