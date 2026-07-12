@@ -230,7 +230,6 @@ sudo ./facebash.sh
 
 elif [[ $islem == 17 || $islem == 017 ]]; then
 clear
-echo -e "\033[47;3;35m Instalimi mund të marrë pak kohe\033[0m"
 sleep 3
 cd Tools
 pkg install git
