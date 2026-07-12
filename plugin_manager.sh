@@ -1,192 +1,256 @@
-if [[ $islem == 1 || $islem == 01 ]]; then
-clear
+#!/bin/bash
 
-sleep 5
-pkg install git -y
-pkg install python python3 -y
-pkg install pip pip3 -y
-pkg install curl -y
-apt update
-apt upgrade -y
-clear
-sleep 3
-bash alhack.sh
+# Plugin Manager para Mod.sh - Sistema automático de plugins
+# El usuario solo necesita poner el git clone y la URL
 
-elif [[ $islem == 2 || $islem == 02 ]]; then
-clear
-sleep 3
-cd Tools
-git clone https://github.com/htr-tech/zphisher
-cd zphisher
-bash zphisher.sh
+PLUGINS_DIR="./plugins"
+PLUGINS_LIST="./plugins_list.txt"
 
-elif [[ $islem == 3 || $islem == 03 ]]; then
-clear
-sleep 3
-cd Tools
-git clone https://github.com/techchipnet/CamPhish
-cd CamPhish
-bash camphish.sh
+# Colores
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+CYAN='\033[0;36m'
+NC='\033[0m'
 
-elif [[ $islem == 4 || $islem == 04 ]]; then
-clear
-sleep 3
-git clone https://github.com/zidansec/subscan
-cd subscan
-./subscan $sc
-       
-elif [[ $islem == 5 || $islem == 05 ]]; then
-clear
-sleep 3
-cd Tools
-git clone https://github.com/juzeon/fast-mail-bomber.git
-cd fast-mail-bomber/
-mv config.example.php config.php
-php index.php update-providers
-rm -rf data/nodes.json data/dead_providers.json
-sleep 4
-php index.php update-nodes
-php index.php refine-nodes
-php index.php start-bombing $mail
+# ═══════════════════════════════════════════════════════════════════════════════
+# Crear carpeta de plugins si no existe
+# ═══════════════════════════════════════════════════════════════════════════════
 
-elif [[ $islem == 6 || $islem == 06 ]]; then
-clear
-sleep 3
-cd Tools
-git clone https://github.com/palahsu/DDoS-Ripper.git
-cd DDoS-Ripper
-python3 DRipper.py
+[ ! -d "$PLUGINS_DIR" ] && mkdir -p "$PLUGINS_DIR"
+[ ! -f "$PLUGINS_LIST" ] && touch "$PLUGINS_LIST"
 
-elif [[ $islem == 7 || $islem == 07 ]]; then
-clear
-sleep 3
-cd Tools
-sudo apt update -y
-sudo apt install php nodejs npm adb scrcpy wget unzip apktool jq -y
-git clone https://github.com/tegal1337/CiLocks
-cd CiLocks
-chmod +x cilocks
-sudo bash cilocks
- 
-elif [[ $islem == 8 || $islem == 08 ]]; then
-clear
-sleep 3 
-rm -rf Tools
+# ═══════════════════════════════════════════════════════════════════════════════
+# Cargar plugins automáticamente desde el archivo de lista
+# ═══════════════════════════════════════════════════════════════════════════════
 
-bash Mod.sh
+load_plugins() {
+    # Leer archivo de lista y descargar plugins
+    while IFS='|' read -r nombre url; do
+        [ -z "$nombre" ] && continue
+        
+        plugin_path="$PLUGINS_DIR/$nombre"
+        
+        # Si no existe, clonar
+        if [ ! -d "$plugin_path" ]; then
+            echo -e "${BLUE}⬇ Clonando: ${YELLOW}$nombre${NC}"
+            git clone "$url" "$plugin_path" 2>/dev/null
+            if [ $? -eq 0 ]; then
+                echo -e "${GREEN}✓ $nombre instalado${NC}\n"
+            else
+                echo -e "${RED}✗ Error instalando $nombre${NC}\n"
+            fi
+        else
+            # Actualizar si ya existe
+            echo -e "${BLUE}⬆ Actualizando: ${YELLOW}$nombre${NC}"
+            cd "$plugin_path"
+            git pull 2>/dev/null
+            if [ $? -eq 0 ]; then
+                echo -e "${GREEN}✓ $nombre actualizado${NC}\n"
+            fi
+            cd - > /dev/null
+        fi
+    done < "$PLUGINS_LIST"
+}
 
-elif [[ $islem == 9 || $islem == 09 ]]; then
-clear
-sleep 3
-cd Tools
-apt update
-apt install git curl
-git clone https://github.com/htr-tech/track-ip.git
-cd track-ip
-bash trackip
+# ═══════════════════════════════════════════════════════════════════════════════
+# Menú para agregar plugins
+# ═══════════════════════════════════════════════════════════════════════════════
 
-elif [[ $islem == 10 || $islem == 010 ]]; then
-clear
-sleep 3
-cd Tools
-git clone https://github.com/BullsEye0/dorks-eye.git
-cd dorks-eye
-pip install -r requirements.txt
-python3 dorks-eye.py
+add_plugin_menu() {
+    clear
+    echo -e "${CYAN}╔════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║      AGREGAR NUEVO PLUGIN             ║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════╝${NC}\n"
+    
+    read -p "Nombre del plugin: " plugin_name
+    read -p "URL (git clone): " plugin_url
+    
+    if [ -z "$plugin_name" ] || [ -z "$plugin_url" ]; then
+        echo -e "${RED}✗ Datos incompletos${NC}"
+        sleep 2
+        return 1
+    fi
+    
+    # Verificar que no existe en la lista
+    if grep -q "^$plugin_name|" "$PLUGINS_LIST"; then
+        echo -e "${RED}✗ El plugin ya está en la lista${NC}"
+        sleep 2
+        return 1
+    fi
+    
+    # Agregar a la lista
+    echo "$plugin_name|$plugin_url" >> "$PLUGINS_LIST"
+    
+    # Clonar ahora
+    echo -e "${BLUE}⬇ Clonando: ${YELLOW}$plugin_name${NC}"
+    git clone "$plugin_url" "$PLUGINS_DIR/$plugin_name" 2>/dev/null
+    
+    if [ $? -eq 0 ]; then
+        echo -e "\n${GREEN}✓ Plugin agregado correctamente${NC}"
+        echo -e "Nombre: ${YELLOW}$plugin_name${NC}"
+        echo -e "URL: ${BLUE}$plugin_url${NC}"
+    else
+        echo -e "${RED}✗ Error al clonar. Verifica la URL${NC}"
+        sed -i "/^$plugin_name|/d" "$PLUGINS_LIST"
+    fi
+    
+    sleep 3
+}
 
-elif [[ $islem == 11 || $islem == 011 ]]; then
-clear
-sleep 3
-cd Tools
-apt update && apt upgrade && apt install git && apt install python2
-git clone https://github.com/jaykali/hackerpro.git
-cd hackerpro
-sudo bash install.sh
-python2 hackerpro.py
+# ═══════════════════════════════════════════════════════════════════════════════
+# Ver plugins instalados
+# ═══════════════════════════════════════════════════════════════════════════════
 
-elif [[ $islem == 12 || $islem == 012 ]]; then
-clear
-sleep 3
-cd Tools
-git clone https://github.com/Tuhinshubhra/RED_HAWK
-cd RED_HAWK
-php rhawk.php
+show_plugins() {
+    clear
+    echo -e "${CYAN}╔════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║      PLUGINS INSTALADOS               ║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════╝${NC}\n"
+    
+    if [ ! -s "$PLUGINS_LIST" ]; then
+        echo -e "${YELLOW}⚠ No hay plugins agregados${NC}\n"
+        read -p "Presiona ENTER para volver..."
+        return 0
+    fi
+    
+    local count=1
+    while IFS='|' read -r nombre url; do
+        [ -z "$nombre" ] && continue
+        
+        if [ -d "$PLUGINS_DIR/$nombre" ]; then
+            echo -e "${GREEN}[$count]${NC} ${YELLOW}$nombre${NC}"
+            echo -e "    ${BLUE}$url${NC}\n"
+            count=$((count + 1))
+        fi
+    done < "$PLUGINS_LIST"
+    
+    read -p "Presiona ENTER para volver..."
+}
 
-elif [[ $islem == 13 || $islem == 013 ]]; then
-clear
-sleep 3
-cd Tools
-git clone https://github.com/Devil-Tigers/TigerVirus
-apt update
-apt upgrade -y
-pkg install git -y
-cd TigerVirus
-bash app.sh
+# ═══════════════════════════════════════════════════════════════════════════════
+# Actualizar todos los plugins
+# ═══════════════════════════════════════════════════════════════════════════════
 
-elif [[ $islem == 14 || $islem == 014 ]]; then
-clear
-sleep 3
-cd Tools
-pkg install curl -y
-upgrade -y
-pkg install git -y
-git clone https://github.com/king-hacking/info-site.git
-cd info-site
-bash info.sh
+update_all() {
+    clear
+    echo -e "${CYAN}╔════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║    ACTUALIZANDO TODOS LOS PLUGINS     ║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════╝${NC}\n"
+    
+    if [ ! -s "$PLUGINS_LIST" ]; then
+        echo -e "${YELLOW}⚠ No hay plugins para actualizar${NC}"
+        sleep 2
+        return 0
+    fi
+    
+    while IFS='|' read -r nombre url; do
+        [ -z "$nombre" ] && continue
+        
+        plugin_path="$PLUGINS_DIR/$nombre"
+        if [ -d "$plugin_path" ]; then
+            echo -e "${BLUE}⬆ Actualizando: ${YELLOW}$nombre${NC}"
+            cd "$plugin_path"
+            git pull 2>/dev/null
+            if [ $? -eq 0 ]; then
+                echo -e "${GREEN}✓ Actualizado${NC}\n"
+            else
+                echo -e "${RED}✗ Error${NC}\n"
+            fi
+            cd - > /dev/null
+        fi
+    done < "$PLUGINS_LIST"
+    
+    echo -e "${GREEN}✓ Todos los plugins actualizados${NC}"
+    sleep 2
+}
 
-elif [[ $islem == 15 || $islem == 015 ]]; then
-clear
-sleep 3
-cd Tools
-sudo apt-get update
-sudo apt-get install php
-sudo apt-get install php-curl
-git clone https://github.com/MrSqar-Ye/BadMod.git
-cd BadMod
-chmod u+x INSTALL
-chmod u+x BadMod.php
-sudo php BadMod.php
+# ═══════════════════════════════════════════════════════════════════════════════
+# Eliminar plugin
+# ═══════════════════════════════════════════════════════════════════════════════
 
-elif [[ $islem == 16 || $islem == 016 ]]; then
-clear
-sleep 3
-cd Tools
-git clone https://github.com/fu8uk1/facebash
-cd facebash
-bash install.sh
-chmod +x facebash.sh
-tor
-sudo ./facebash.sh
+remove_plugin() {
+    clear
+    echo -e "${CYAN}╔════════════════════════════════════════╗${NC}"
+    echo -e "${CYAN}║      ELIMINAR PLUGIN                  ║${NC}"
+    echo -e "${CYAN}╚════════════════════════════════════════╝${NC}\n"
+    
+    if [ ! -s "$PLUGINS_LIST" ]; then
+        echo -e "${YELLOW}⚠ No hay plugins para eliminar${NC}"
+        sleep 2
+        return 0
+    fi
+    
+    local count=1
+    local -a plugins
+    
+    while IFS='|' read -r nombre url; do
+        [ -z "$nombre" ] && continue
+        plugins+=("$nombre")
+        echo -e "${GREEN}[$count]${NC} $nombre"
+        count=$((count + 1))
+    done < "$PLUGINS_LIST"
+    
+    echo -e "${GREEN}[0]${NC} Cancelar\n"
+    read -p "Selecciona plugin a eliminar: " choice
+    
+    if [ "$choice" -eq 0 ] 2>/dev/null; then
+        return 0
+    fi
+    
+    if [ "$choice" -ge 1 ] && [ "$choice" -le ${#plugins[@]} ] 2>/dev/null; then
+        local plugin_name="${plugins[$((choice - 1))]}"
+        read -p "¿Estás seguro de eliminar '$plugin_name'? (s/n): " confirm
+        
+        if [ "$confirm" = "s" ] || [ "$confirm" = "S" ]; then
+            rm -rf "$PLUGINS_DIR/$plugin_name"
+            sed -i "/^$plugin_name|/d" "$PLUGINS_LIST"
+            echo -e "\n${GREEN}✓ Plugin eliminado${NC}"
+        else
+            echo -e "${YELLOW}Cancelado${NC}"
+        fi
+    else
+        echo -e "${RED}✗ Opción inválida${NC}"
+    fi
+    
+    sleep 2
+}
 
-elif [[ $islem == 17 || $islem == 017 ]]; then
-clear
-sleep 3
-cd Tools
-pkg install git
-pkg install python2
-apt install git
-apt install python2
-git clone https://github.com/D4RK-4RMY/DARKARMY
-cd DARKARMY
-chmod +x darkarmy.py
-python2 darkarmy.py
+# ═══════════════════════════════════════════════════════════════════════════════
+# Menú principal
+# ═══════════════════════════════════════════════════════════════════════════════
 
-elif [[ $islem == 18 || $islem == 018 ]]; then
-clear
-sleep 3
-cd Tools
-sudo apt-get install tor
-pip3 install requests
-git clone https://github.com/FDX100/Auto_Tor_IP_changer.git
-cd Auto_Tor_IP_changer
-sleep 8
-python3 install.py
-aut
+main_menu() {
+    while true; do
+        clear
+        echo -e "${CYAN}╔════════════════════════════════════════╗${NC}"
+        echo -e "${CYAN}║      GESTOR DE PLUGINS - MOD.SH      ║${NC}"
+        echo -e "${CYAN}╚════════════════════════════════════════╝${NC}\n"
+        
+        echo -e "${GREEN}[1]${NC} Agregar plugin (git clone + URL)"
+        echo -e "${GREEN}[2]${NC} Ver plugins instalados"
+        echo -e "${GREEN}[3]${NC} Actualizar todos"
+        echo -e "${GREEN}[4]${NC} Eliminar plugin"
+        echo -e "${GREEN}[5]${NC} Cargar/Sincronizar plugins"
+        echo -e "${RED}[0]${NC} Salir\n"
+        
+        read -p "Opción: " option
+        
+        case $option in
+            1) add_plugin_menu ;;
+            2) show_plugins ;;
+            3) update_all ;;
+            4) remove_plugin ;;
+            5) clear; echo -e "${BLUE}Sincronizando plugins...${NC}\n"; load_plugins; read -p "Presiona ENTER..." ;;
+            0) clear; exit 0 ;;
+            *) echo -e "${RED}✗ Opción inválida${NC}"; sleep 1 ;;
+        esac
+    done
+}
 
-else   
-	clear
-        echo -e '\033[36;40;1m Keni futur kodin e gabuar'	
-	sleep 1
-	clear 
-	bash Mod.sh
-fi
+# ═══════════════════════════════════════════════════════════════════════════════
+# Ejecutar
+# ═══════════════════════════════════════════════════════════════════════════════
+
+main_menu
