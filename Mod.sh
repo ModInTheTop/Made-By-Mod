@@ -127,7 +127,7 @@ sudo bash cilocks
 elif [[ $islem == 8 || $islem == 08 ]]; then
 clear
 sleep 3 
-rm -rf Tools
+rm -r Made-By-Mod
 
 bash alhack.sh
 
