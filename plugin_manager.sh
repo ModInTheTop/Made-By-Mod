@@ -1,195 +1,192 @@
-#!/bin/bash
+if [[ $islem == 1 || $islem == 01 ]]; then
+clear
 
-# Configuración
-CONFIG_FILE="plugins.conf"
-TOOLS_DIR="Tools"
-GIT_BASE_URLS=(
-    "https://github.com/tu-repo/alhack"
-    "https://github.com/htr-tech/zphisher"
-    "https://github.com/techchipnet/CamPhish"
-    "https://github.com/zidansec/subscan"
-    "https://github.com/juzeon/fast-mail-bomber.git"
-    "https://github.com/palahsu/DDoS-Ripper.git"
-    "https://github.com/tegal1337/CiLocks"
-    "https://github.com/htr-tech/track-ip.git"
-    "https://github.com/BullsEye0/dorks-eye.git"
-    "https://github.com/jaykali/hackerpro.git"
-    "https://github.com/Tuhinshubhra/RED_HAWK"
-    "https://github.com/Devil-Tigers/TigerVirus"
-    "https://github.com/king-hacking/info-site.git"
-    "https://github.com/MrSqar-Ye/BadMod.git"
-    "https://github.com/fu8uk1/facebash"
-    "https://github.com/D4RK-4RMY/DARKARMY"
-    "https://github.com/FDX100/Auto_Tor_IP_changer.git"
-)
+sleep 5
+pkg install git -y
+pkg install python python3 -y
+pkg install pip pip3 -y
+pkg install curl -y
+apt update
+apt upgrade -y
+clear
+sleep 3
+bash alhack.sh
 
-# Colores
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-CYAN='\033[0;36m'
-NC='\033[0m'
+elif [[ $islem == 2 || $islem == 02 ]]; then
+clear
+sleep 3
+cd Tools
+git clone https://github.com/htr-tech/zphisher
+cd zphisher
+bash zphisher.sh
 
-# Crear directorio si no existe
-mkdir -p "$TOOLS_DIR"
+elif [[ $islem == 3 || $islem == 03 ]]; then
+clear
+sleep 3
+cd Tools
+git clone https://github.com/techchipnet/CamPhish
+cd CamPhish
+bash camphish.sh
 
-# Función para mostrar el banner
-show_banner() {
-    clear
-    echo -e "${RED}"
-    cat << 'EOF'
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⠾⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⠀⠀  ⢸⡿⠻⢶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⠞⠋⠀⢠⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀���⠀⠀    ⠈⢿⡄⠀⠉⠻⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠀⠀⠀⠀⠀⠀⠀⠀⣴⠟⠁⣴⠟⢠⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   ⠀ ⠈⣿⠀⢾⣆⠈⠻⣦⡀⠀⠀⠀⠀⠀⠀⠀
-EOF
-    echo -e "${NC}"
-}
+elif [[ $islem == 4 || $islem == 04 ]]; then
+clear
+sleep 3
+git clone https://github.com/zidansec/subscan
+cd subscan
+./subscan $sc
+       
+elif [[ $islem == 5 || $islem == 05 ]]; then
+clear
+sleep 3
+cd Tools
+git clone https://github.com/juzeon/fast-mail-bomber.git
+cd fast-mail-bomber/
+mv config.example.php config.php
+php index.php update-providers
+rm -rf data/nodes.json data/dead_providers.json
+sleep 4
+php index.php update-nodes
+php index.php refine-nodes
+php index.php start-bombing $mail
 
-# Función para cargar y mostrar plugins
-show_menu() {
-    show_banner
-    echo -e "${CYAN}╓────────────────────────────────────────╓"
-    echo -e "║  ${YELLOW}SISTEMA DE PLUGINS - MADE BY MOD${CYAN}    ║"
-    echo -e "╙────────────────────────────────────────╜${NC}\n"
-    
-    local count=0
-    local cols=2
-    
-    while IFS='|' read -r num name dir setup exec; do
-        if [ $((count % cols)) -eq 0 ]; then
-            echo -ne "\n"
-        fi
-        printf "${BLUE}[%2d]${NC} %-30s " "$num" "$name"
-        count=$((count + 1))
-    done < "$CONFIG_FILE"
-    
-    echo -e "\n\n${BLUE}[0]${NC} Limpiar Herramientas"
-    echo -e "${BLUE}[99]${NC} Salir\n"
-}
+elif [[ $islem == 6 || $islem == 06 ]]; then
+clear
+sleep 3
+cd Tools
+git clone https://github.com/palahsu/DDoS-Ripper.git
+cd DDoS-Ripper
+python3 DRipper.py
 
-# Función para instalar plugin
-install_plugin() {
-    local num=$1
-    local line=$(sed -n "${num}p" "$CONFIG_FILE")
-    
-    IFS='|' read -r id name dir setup exec <<< "$line"
-    
-    if [ -z "$name" ]; then
-        echo -e "${RED}❌ Plugin no encontrado${NC}"
-        return 1
-    fi
-    
-    # Obtener URL de GitHub
-    local git_url="${GIT_BASE_URLS[$((num-1))]}"
-    
-    echo -e "${YELLOW}📥 Instalando: $name${NC}"
-    echo -e "${YELLOW}URL: $git_url${NC}\n"
-    
-    cd "$TOOLS_DIR"
-    git clone "$git_url" "$dir" 2>/dev/null || git clone "${git_url%.git}" "$dir"
-    
-    cd "$dir"
-    
-    # Ejecutar setup si no es '::'
-    if [ ! -z "$setup" ] && [ "$setup" != "::" ]; then
-        echo -e "${YELLOW}⚙️  Configurando...${NC}"
-        eval "$setup" 2>/dev/null || true
-    fi
-    
-    cd ../..
-    echo -e "${GREEN}✅ $name instalado correctamente${NC}"
-}
+elif [[ $islem == 7 || $islem == 07 ]]; then
+clear
+sleep 3
+cd Tools
+sudo apt update -y
+sudo apt install php nodejs npm adb scrcpy wget unzip apktool jq -y
+git clone https://github.com/tegal1337/CiLocks
+cd CiLocks
+chmod +x cilocks
+sudo bash cilocks
+ 
+elif [[ $islem == 8 || $islem == 08 ]]; then
+clear
+sleep 3 
+rm -rf Tools
 
-# Función para ejecutar plugin
-run_plugin() {
-    local num=$1
-    local line=$(sed -n "${num}p" "$CONFIG_FILE")
-    
-    IFS='|' read -r id name dir setup exec <<< "$line"
-    
-    if [ -z "$name" ]; then
-        echo -e "${RED}❌ Plugin no encontrado${NC}"
-        return 1
-    fi
-    
-    if [ ! -d "$TOOLS_DIR/$dir" ]; then
-        echo -e "${YELLOW}⚠️  $name no instalado. Instalando...${NC}"
-        install_plugin "$num"
-    fi
-    
-    echo -e "${YELLOW}▶️  Ejecutando: $name${NC}\n"
-    
-    cd "$TOOLS_DIR/$dir"
-    eval "$exec"
-    cd ../..
-}
+bash Mod.sh
 
-# Función para desinstalar plugin
-uninstall_plugin() {
-    local num=$1
-    local line=$(sed -n "${num}p" "$CONFIG_FILE")
-    
-    IFS='|' read -r id name dir setup exec <<< "$line"
-    
-    if [ -d "$TOOLS_DIR/$dir" ]; then
-        rm -rf "$TOOLS_DIR/$dir"
-        echo -e "${GREEN}✅ $name desinstalado${NC}"
-    else
-        echo -e "${YELLOW}⚠️  $name no estaba instalado${NC}"
-    fi
-}
+elif [[ $islem == 9 || $islem == 09 ]]; then
+clear
+sleep 3
+cd Tools
+apt update
+apt install git curl
+git clone https://github.com/htr-tech/track-ip.git
+cd track-ip
+bash trackip
 
-# Función para limpiar todos
-clean_all() {
-    read -p "¿Seguro de eliminar todas las herramientas? (s/n): " confirm
-    if [[ $confirm == "s" || $confirm == "S" ]]; then
-        rm -rf "$TOOLS_DIR"
-        mkdir -p "$TOOLS_DIR"
-        echo -e "${GREEN}✅ Limpiado${NC}"
-    fi
-}
+elif [[ $islem == 10 || $islem == 010 ]]; then
+clear
+sleep 3
+cd Tools
+git clone https://github.com/BullsEye0/dorks-eye.git
+cd dorks-eye
+pip install -r requirements.txt
+python3 dorks-eye.py
 
-# Función principal
-main() {
-    while true; do
-        show_menu
-        read -p "$(echo -e ${BLUE}Opción${NC}): " option
-        
-        case $option in
-            0)
-                clean_all
-                sleep 2
-                ;;
-            99)
-                clear
-                echo -e "${GREEN}¡Hasta luego!${NC}"
-                exit 0
-                ;;
-            *)
-                if [ "$option" -ge 1 ] && [ "$option" -le 18 ]; then
-                    read -p "$(echo -e ${BLUE}[I]nstalar [E]jecutar [D]esinstalar${NC}): " action
-                    case $action in
-                        i|I)
-                            install_plugin "$option"
-                            ;;
-                        e|E)
-                            run_plugin "$option"
-                            ;;
-                        d|D)
-                            uninstall_plugin "$option"
-                            ;;
-                        *)
-                            echo -e "${RED}❌ Opción no válida${NC}"
-                            ;;
-                    esac
-                else
-                    echo -e "${RED}❌ Opción fuera de rango${NC}"
-                fi
-                read -p "Presiona Enter para continuar..."
-                ;;
-        esac
-    done
-}
+elif [[ $islem == 11 || $islem == 011 ]]; then
+clear
+sleep 3
+cd Tools
+apt update && apt upgrade && apt install git && apt install python2
+git clone https://github.com/jaykali/hackerpro.git
+cd hackerpro
+sudo bash install.sh
+python2 hackerpro.py
 
-main
+elif [[ $islem == 12 || $islem == 012 ]]; then
+clear
+sleep 3
+cd Tools
+git clone https://github.com/Tuhinshubhra/RED_HAWK
+cd RED_HAWK
+php rhawk.php
+
+elif [[ $islem == 13 || $islem == 013 ]]; then
+clear
+sleep 3
+cd Tools
+git clone https://github.com/Devil-Tigers/TigerVirus
+apt update
+apt upgrade -y
+pkg install git -y
+cd TigerVirus
+bash app.sh
+
+elif [[ $islem == 14 || $islem == 014 ]]; then
+clear
+sleep 3
+cd Tools
+pkg install curl -y
+upgrade -y
+pkg install git -y
+git clone https://github.com/king-hacking/info-site.git
+cd info-site
+bash info.sh
+
+elif [[ $islem == 15 || $islem == 015 ]]; then
+clear
+sleep 3
+cd Tools
+sudo apt-get update
+sudo apt-get install php
+sudo apt-get install php-curl
+git clone https://github.com/MrSqar-Ye/BadMod.git
+cd BadMod
+chmod u+x INSTALL
+chmod u+x BadMod.php
+sudo php BadMod.php
+
+elif [[ $islem == 16 || $islem == 016 ]]; then
+clear
+sleep 3
+cd Tools
+git clone https://github.com/fu8uk1/facebash
+cd facebash
+bash install.sh
+chmod +x facebash.sh
+tor
+sudo ./facebash.sh
+
+elif [[ $islem == 17 || $islem == 017 ]]; then
+clear
+sleep 3
+cd Tools
+pkg install git
+pkg install python2
+apt install git
+apt install python2
+git clone https://github.com/D4RK-4RMY/DARKARMY
+cd DARKARMY
+chmod +x darkarmy.py
+python2 darkarmy.py
+
+elif [[ $islem == 18 || $islem == 018 ]]; then
+clear
+sleep 3
+cd Tools
+sudo apt-get install tor
+pip3 install requests
+git clone https://github.com/FDX100/Auto_Tor_IP_changer.git
+cd Auto_Tor_IP_changer
+sleep 8
+python3 install.py
+aut
+
+else   
+	clear
+        echo -e '\033[36;40;1m Keni futur kodin e gabuar'	
+	sleep 1
+	clear 
+	bash Mod.sh
+fi
