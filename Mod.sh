@@ -40,13 +40,13 @@ echo -e '\033[31;40;1m
  .________________________________________________________________________________. 
   Fuck Society - Bad Choices Make Good Stories - Ur Blessed - The World Is Yours
  .________________________________________________________________________________. 
-\e[36m ⤷ \e[37m[1]\e[36m Actualizar la Shell         ⤷ \e[37m[2]\e[36m Phishing Tool				
- ⤷ \e[37m[3]\e[36m WebCam Hack                 ⤷ \e[37m[4]\e[36m Subscan			
+\e[36m ⤷ \e[37m[1]\e[36m Actualizar la Shell          ⤷ \e[37m[2]\e[36m Phishing Tool				
+ ⤷ \e[37m[3]\e[36m WebCam Hack                  ⤷ \e[37m[4]\e[36m Subscan			
  ⤷ \e[37m[5]\e[36m Gmail Bomber		    ⤷ \e[37m[6]\e[36m DDOS Attack			
- ⤷ \e[37m[7]\e[36m CiLocks (Track Android(root)⤷ \e[37m[8]\e[36m Desinstale los programas descargados		
+ ⤷ \e[37m[7]\e[36m CiLocks # Tracker Android ⤷ \e[37m[8]\e[36m Desinstale los programas descargados		
  ⤷ \e[37m[9]\e[36m Ip Info	                    ⤷ \e[37m[10]\e[36m Dorks-eye
- ⤷ \e[37m[11]\e[36m HackerPro                  ⤷ \e[37m[12]\e[36m RED_HAWK
- ⤷ \e[37m[13]\e[36m VirusCrafter               ⤷ \e[37m[14]\e[36m Info-Site
+ ⤷ \e[37m[11]\e[36m HackerPro                   ⤷ \e[37m[12]\e[36m RED_HAWK
+ ⤷ \e[37m[13]\e[36m VirusCrafter                ⤷ \e[37m[14]\e[36m Info-Site
  ⤷ \e[37m[15]\e[36m BadMod	                    ⤷ \e[37m[16]\e[36m Facebash
  ⤷ \e[37m[17]\e[36m DARKARMY                    ⤷ \e[37m[18]\e[36m AUTO-IP-CHANGER
 
