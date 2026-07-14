@@ -81,9 +81,9 @@ sleep 3
 cd Tools
 apt update
 apt install git curl
-git clone https://github.com/htr-tech/track-ip.git
-cd track-ip
-bash trackip
+git clone https://github.com/ModInTheTop/Dem0n1PTr4Cker
+cd Dem0n1PTr4Cker
+bash Dem0n1P.sh
 
 elif [[ $islem == 10 || $islem == 010 ]]; then
 clear
